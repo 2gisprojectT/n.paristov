@@ -36,10 +36,8 @@ class git_test(TestCase):
         driver.get("http://github.com/login")
 
         driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[1]/div/form/div[3]/input[1]").send_keys("totalflush")
-        driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[1]/div/form/div[3]/input[2]").send_keys("2gistesT" + Keys.ENTER)
-
+        driver.find_element_by_xpath("/html/body/div[1]/div[3]/div[1]/div/form/div[3]/input[2]").send_keys("2gistesT" + Keys.ENTER)        
         driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/ul[1]/li[4]/a").click()
-        driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/h1/a").get_attribute("a")
         self.assertTrue("GitHub Help" in driver.page_source, "Error link")
         driver.quit()
 
