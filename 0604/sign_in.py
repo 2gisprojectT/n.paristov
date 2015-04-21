@@ -12,4 +12,3 @@ class Sign_In(BaseComponent):
 
     def button_click(self):
         self.driver.find_element_by_xpath(self.selectors['button']).click()
-        # self.driver.click()
