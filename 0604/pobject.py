@@ -13,24 +13,28 @@ class SeleniumTest(TestCase):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(5)
         page = Page(self.driver)
-        page.open("http://mail.ru")
+        page.open("http://github.com")
 
     def tearDown(self):
         self.driver.close()
 
-    def test_search(self):
+    def test_login(self):
         page = Page(self.driver)
-        self.assertEqual("Mail.Ru: почта, поиск в интернете, новости, игры", page.title, "Ошибка загрузки страницы")
-        page.search_bar.search(u"2гис")
-        self.assertEqual("2гис - 2 млн результатов. Поиск Mail.Ru", page.title,  "Ошибка поиска")
-        result = self.driver.find_element_by_xpath('/html/body/div[2]/div[5]/div[1]/div/section/div/ul/li[2]/h3/a')
-        res = result.get_attribute("class")
-        self.assertEqual("light-link", res, "Ошибка отображения результатов")
+        page.sign_in().button_click()
+        page.login().login("totalflush", "2gistesT")
 
-    def test_zodiak(self):
+        login = self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div/ul[2]/li[1]/a/span/span")
+        span = login.get_attribute("class")
+        self.assertEqual("css-truncate-target", span, "Login error!")
+
+    def test_help(self):
         page = Page(self.driver)
-        self.driver.find_element_by_xpath('/html/body/div[2]/div[4]/div[3]/div[2]/div[1]/div/table[1]/tbody/tr/td[3]/div/a/span').click()
-        self.assertNotEqual("Mail.ru", page.current_url, "Некорректная ссылка")
+        page.sign_in().button_click()
+        page.login().login("totalflush", "2gistesT")
+
+        page.git_help().help()
+        self.assertTrue("GitHub Help" in page.title, "Error link")
+
 
 if __name__ == '__main__':
     unittest.main()
