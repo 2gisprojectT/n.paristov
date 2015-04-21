@@ -1,7 +1,6 @@
 __author__ = 'whitefoxnsk'
 
 from base_component import BaseComponent
-from selenium.webdriver.common.keys import Keys
 
 
 class git_help(BaseComponent):
